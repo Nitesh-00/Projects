@@ -44,7 +44,7 @@ function NavBar() {
         </div>
         <Link to="/cart" className="relative">
           <img src={assets.cart_icon} alt="" className="w-5" />
-          <p class="absolute -bottom-1 -right-1 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+          <p className="absolute -bottom-1 -right-1 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
             3
           </p>
         </Link>
@@ -56,10 +56,10 @@ function NavBar() {
               <img src={assets.dropdown_icon} alt="" className="h-5"/>
               <p>Back</p>
             </div>
-            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded ' to='Home'>Home</NavLink>
-            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='collection'>Collections</NavLink>
-            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='about'>ABOUT</NavLink>
-            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='home'>CONTACT</NavLink>
+            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded ' to='/'>Home</NavLink>
+            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='/collection'>Collections</NavLink>
+            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='/about'>ABOUT</NavLink>
+            <NavLink onClick={()=> setVisible(false)} className='py-2 pl-6 block border-l-4 transition duration-200 rounded' to='/contact'>CONTACT</NavLink>
           </div>
       </div>
     </div>
