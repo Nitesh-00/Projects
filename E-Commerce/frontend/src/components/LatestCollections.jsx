@@ -15,12 +15,20 @@ const LatestCollections = () => {
   return (
     <div>
       <div>
-        <Title></Title>
+        <div className="flex flex-col items-center justify-center text-center px-4 py-6 gap-2">
+  <Title title1="LATEST" title2="COLLECTIONS" />
+  <p className="text-sm text-gray-600">
+    Timeless, confident, and instantly memorable — captures luxury and wear-anywhere appeal.
+  </p>
+</div>
+
+        
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
             {
                 latest.map((item,index)=> (<Products key={index} id={item.id} image={item.image} name={item.name} price={item.price} />))
             }
         </div>
+        
         
       </div>
     </div>

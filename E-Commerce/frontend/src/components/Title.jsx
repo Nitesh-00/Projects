@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-const Title = () => {
+const Title = ({ title1, title2 }) => {
   return (
-    <div>
-      <div className='py-10 flex flex-col  items-center justify-center'>
-        <div className='text-[32px] font-medium'>
-            <p className='text-gray-400 '>LATEST <span className='text-black'>COLLECTIONS</span></p>
+    <div className="pt-10 flex justify-center">
+      <div className="flex flex-col items-center text-center">
+        <div className="flex items-center gap-4">
+          <p className="text-[32px] font-medium text-gray-400">
+            {title1} <span className="text-black">{title2}</span>
+          </p>
+          <div className="w-12 h-[3px] bg-[#292929]"></div>
         </div>
-        <p className='text-sm'>Lorem ipsum dolor sit amet anlknallkajslijslj smxlsals salkx;lsm
-        </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Title
+export default Title;
