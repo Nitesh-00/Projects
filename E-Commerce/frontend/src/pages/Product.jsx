@@ -7,9 +7,10 @@ import RelatedProduct from "../components/RelatedProduct";
 
 function Product() {
   const { productId } = useParams();
-  const { products } = useContext(UserContext);
+  const { products,cartItem,addToCart } = useContext(UserContext);
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
+  const [size,setSize] = useState('')
 
   useEffect(() => {
     const item = products.find((item) => item._id === productId);
@@ -80,8 +81,11 @@ function Product() {
             <div className="flex gap-3 flex-wrap">
               {productData.sizes.map((item, index) => (
                 <button
+                  onClick={()=>setSize(item)}
                   key={index}
-                  className="px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-200 transition"
+                  className={`px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-200 transition ${size === item
+        ? "border-yellow bg-orange-100 font-medium"
+        : "border-gray-400 hover:bg-gray-200"}`}
                 >
                   {item}
                 </button>
@@ -90,7 +94,7 @@ function Product() {
           </div>
 
           {/* Add to Cart */}
-          <button className="mt-4 px-6 py-3 bg-gray-900 text-white text-lg rounded-lg hover:bg-gray-700 transition duration-200">
+          <button onClick={()=>(addToCart(productData._id,size))} className="mt-4 px-6 py-3 bg-gray-900 text-white text-lg rounded-lg hover:bg-gray-700 transition duration-200">
             Add to Cart
           </button>
 

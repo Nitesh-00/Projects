@@ -6,7 +6,7 @@ import { UserContext } from "../context/Context";
 function NavBar() {
 
   const [visible,setVisible] = useState(false);
-  const {setShowSearch} = useContext(UserContext);
+  const {setShowSearch,cartCount} = useContext(UserContext);
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       <img src={assets.logo} className="w-36" alt="" />
@@ -47,7 +47,7 @@ function NavBar() {
         <Link to="/cart" className="relative">
           <img src={assets.cart_icon} alt="" className="w-5" />
           <p className="absolute -bottom-1 -right-1 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-            3
+            {cartCount()}
           </p>
         </Link>
         <img onClick={()=> setVisible(true)} src={assets.menu_icon} className="w-5 cursor-pointer sm:hidden" alt="" />
