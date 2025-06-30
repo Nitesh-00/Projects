@@ -5,11 +5,13 @@ import { UserContext } from "../context/Context";
 import Products from "../components/Products";
 
 function Collection() {
-  const { products } = useContext(UserContext);
+  const { products,search,showSearch } = useContext(UserContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProduct, setFilterProduct] = useState([]);
   const [category,setCategory] = useState([]);
   const [subCategory,setSubCategory] = useState([]);
+  const [sortType,setSortType] = useState('relevant');
+
 
   const toggleCategory = (e) => {
     if(category.includes(e.target.value)){
@@ -38,12 +40,36 @@ function Collection() {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
 
+    if(search && showSearch){
+      productsCopy = productsCopy.filter(item =>item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
     setFilterProduct(productsCopy);
+  }
+
+  const sortProduct = () =>{
+    let sortPro = filterProduct.slice();
+
+    switch(sortType){
+      case 'low-high' :
+        setFilterProduct(sortPro.sort((a,b) => (a.price -b.price)));
+        break;
+      case 'high-low' :
+        setFilterProduct(sortPro.sort((a,b)=> (b.price-a.price)));
+        break;
+      default : 
+        applyFilter();
+        break;
+    }
   }
 
   useEffect(() => {
     applyFilter();
-  }, [category,subCategory]);
+  }, [category,subCategory,search,showSearch]);
+
+  useEffect(() => {
+    sortProduct();
+  }, [sortType]);
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 pt-10 border-t px-4">
@@ -101,7 +127,7 @@ function Collection() {
       <div className="flex-1">
         <div className="flex justify-between items-center text-base sm:text-2xl mb-4">
           <Title title1="ALL" title2="COLLECTIONS" />
-          <select className="border border-gray-300 rounded-md text-sm px-3 py-1 focus:outline-none focus:ring-1 focus:ring-black">
+          <select onChange={(e)=>setSortType(e.target.value)} className="border border-gray-300 rounded-md text-sm px-3 py-1 focus:outline-none focus:ring-1 focus:ring-black">
             <option value="relevant">Sort: Relevant</option>
             <option value="low-high">Sort: Low to High</option>
             <option value="high-low">Sort: High to Low</option>
@@ -112,7 +138,7 @@ function Collection() {
           {filterProduct.map((item, index) => (
             <Products
               key={index}
-              id={item.id}
+              id={item._id}
               image={item.image}
               name={item.name}
               price={item.price}
