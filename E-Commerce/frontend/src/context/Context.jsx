@@ -46,6 +46,23 @@ const Context = ({ children }) => {
     return total;
   }
 
+  const updateQ = async (itemId,size,quantity)=>{
+    let cartData = structuredClone(cartItem);
+    cartData[itemId][size] = quantity;
+    setCartItem(cartData)
+  }
+
+  const Total = ()=>{
+    let total = 0;
+    for(const items in cartItem){
+      const productData = products.find((item)=>item._id === items)
+      for(const item in cartItem[items]){
+        total += productData.price*cartItem[items][item]
+      }
+    }
+    return total;
+  }
+
   useEffect(()=>{
     console.log(cartItem);
     
@@ -54,7 +71,7 @@ const Context = ({ children }) => {
   const value = {
     products,
     currency,
-    delivery,search,setSearch,showSearch,setShowSearch,cartItem,addToCart,cartCount
+    delivery,search,setSearch,showSearch,setShowSearch,cartItem,addToCart,cartCount,updateQ,Total
   };
 
   return (

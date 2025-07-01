@@ -7,7 +7,7 @@ import RelatedProduct from "../components/RelatedProduct";
 
 function Product() {
   const { productId } = useParams();
-  const { products,cartItem,addToCart } = useContext(UserContext);
+  const { products,cartItem,addToCart,currency } = useContext(UserContext);
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [size,setSize] = useState('')
@@ -70,7 +70,7 @@ function Product() {
           </div>
 
           {/* 💰 Price */}
-          <p className="text-3xl font-bold text-black">₹{productData.price}</p>
+          <p className="text-3xl font-bold text-black">{currency}{productData.price}</p>
 
           {/* Description */}
           <p className="text-gray-600 text-sm">{productData.description}</p>
