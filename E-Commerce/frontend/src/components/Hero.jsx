@@ -10,7 +10,7 @@ function Hero() {
             <p className="w-7 h-[2px] bg-[#414141]"></p>
             <p className="font-medium">OUR BESTSELLER</p>
           </div>
-          <h1>LATEST COLLECTIONS</h1>
+          <h1 className="text-3xl sm:py-3 prata-regular">LATEST COLLECTIONS</h1>
           <div className="flex items-center gap-2">
             <p className="font-medium">SHOP NOW</p>
             <p className="w-7 h-[2px] bg-[#414141]"></p>
