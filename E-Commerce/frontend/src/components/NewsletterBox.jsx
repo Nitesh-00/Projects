@@ -5,7 +5,7 @@ const NewsletterBox = () => {
         event.preventDefault();
     }
   return (
-    <div className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition duration-300 w-full max-w-md mx-auto">
+    <div className="bg-white p-5  transition duration-300 w-full max-w-md mx-auto">
       <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
         Subscribe now & get 20% off 
       </h2>

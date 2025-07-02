@@ -43,7 +43,7 @@ function PlaceOrder() {
         </div>
 
         {/* Right - Cart + Payment */}
-        <div className='ml-10'>
+        <div >
           <div className="mb-6">
             <CartTotal />
           </div>
