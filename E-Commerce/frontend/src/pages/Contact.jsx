@@ -5,7 +5,7 @@ import NewsletterBox from '../components/NewsletterBox'
 function Contact() {
   return (
     <div className="min-h-screen px-4 md:px-10 py-15 bg-gray-50">
-      <div className="flex flex-col md:flex-row gap-10 items-center">
+      <div className="flex flex-col md:flex-row gap-15 items-center">
         {/* Image Section */}
         <div className="w-full md:w-1/2">
           <img src={assets.contact_img} alt="Contact Us" className="rounded-lg shadow-md w-full" />
