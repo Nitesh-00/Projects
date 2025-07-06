@@ -1,15 +1,38 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { products } from '../assets/assets';
 import { toast } from 'react-toastify';
+import axios from 'axios'
 
 export const UserContext = createContext();
 
 const Context = ({ children }) => {
+
+
   const currency = '$';
   const delivery = '10';
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const [products,setProducts] = useState([]);
   const [search,setSearch] = useState('');
   const [showSearch,setShowSearch] = useState(true);
   const[cartItem,setCartItem] = useState({});
+
+  const getProductData = async () =>{
+    try {
+
+      const response = await axios.get(backendUrl+"/api/product/list")
+      console.log(response.data);
+      
+      if(response.data.success){
+        setProducts(response.data.products)
+      }
+
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(()=>{
+     getProductData();
+  },[])
 
   const addToCart = async (id,size) =>{
     if(!size){
@@ -64,14 +87,14 @@ const Context = ({ children }) => {
   }
 
   useEffect(()=>{
-    console.log(cartItem);
+  
     
   },[cartItem])
 
   const value = {
     products,
     currency,
-    delivery,search,setSearch,showSearch,setShowSearch,cartItem,addToCart,cartCount,updateQ,Total
+    delivery,search,setSearch,showSearch,setShowSearch,cartItem,addToCart,cartCount,updateQ,Total,backendUrl
   };
 
   return (

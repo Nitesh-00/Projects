@@ -14,9 +14,9 @@ function Login() {
         <hr className="flex-grow border-t border-gray-300" />
       </div>
 
-      {currentPage === 'Login' ? null : ( <input type="text" placeholder="Name" required
-          className=" py-2 px-3 w-full border border-gray-800"
-        />
+      {currentPage === 'Login' ? null : (<input type="text" placeholder="Name" required
+        className=" py-2 px-3 w-full border border-gray-800"
+      />
       )}
 
       <input
