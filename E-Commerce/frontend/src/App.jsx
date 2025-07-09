@@ -13,7 +13,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import SearchBox from "./components/SearchBox";
 import { ToastContainer, toast } from 'react-toastify';
-export const backendUrl = import.meta.env.VITE_BACKEND_URL
+
 
 function App() {
   return (

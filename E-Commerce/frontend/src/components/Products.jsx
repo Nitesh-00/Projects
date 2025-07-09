@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Products = ({ id, image, name, price }) => {
   const { currency } = useContext(UserContext);
+  
 
   return (
     <div className="w-full">

@@ -23,8 +23,6 @@ const Login = ({ setToken }) => {
             
         }
 
-
-
     };
 
     return (

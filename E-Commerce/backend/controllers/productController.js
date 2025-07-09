@@ -33,8 +33,6 @@ const addProduct = async (req, res) => {
             date: Date.now(),
         }
 
-        console.log(productData);
-
         const product = new productModel(productData)
         await product.save();
 
@@ -62,7 +60,6 @@ const removeProduct = async (req, res) => {
 const listProducts = async (req, res) => {
     try {
         const products = await productModel.find({});
-        console.log(products);
 
         res.json({ success: true, products })
 

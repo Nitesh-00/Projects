@@ -1,9 +1,50 @@
 import React, { useContext } from 'react';
 import Title from '../components/Title';
 import { UserContext } from '../context/Context';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios'
+import { toast } from 'react-toastify';
 
 function Orders() {
-  const { products, currency } = useContext(UserContext);
+  const { backendUrl,token, currency } = useContext(UserContext);
+  const [orders,setOrders] = useState([]);
+
+  const loadOrders = async () => {
+    try {
+      if(!token){
+        return null;
+      }
+
+      const response = await axios.post(backendUrl+"/api/order/userorders",{},{headers:{token}});
+      
+      if(response.data.success){
+        const orderfetch = [];
+        response.data.orders.map((order) => {
+          order.items.map((item) => {
+            item.status = order.status;
+            item.payment = order.payment;
+            item.paymentMethod = order.paymentMethod;
+            item.date = order.date;
+            orderfetch.push(item);
+          })
+        })
+
+        setOrders(orderfetch.reverse());
+        
+      }
+      
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+      
+    }
+  }
+
+  useEffect(()=>{
+    loadOrders()
+  },[token])
 
   return (
     <div className="min-h-screen px-4 md:px-10 py-6 bg-gray-50">
@@ -13,7 +54,7 @@ function Orders() {
         </div>
 
         <div className="space-y-6">
-          {products.slice(0, 3).map((item, index) => (
+          {orders.map((item, index) => (
             <div
               key={index}
               className="bg-white p-6 rounded-xl shadow-md flex flex-col md:flex-row justify-between gap-6"
@@ -35,18 +76,19 @@ function Orders() {
                   {/* Row: Price, Quantity, Size */}
                   <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-1">
                     <p>{currency}{item.price}</p>
-                    <p>Quantity: 1</p>
-                    <p>Size: {item.sizes[0]}</p>
+                    <p>{item.quantity}</p>
+                    <p>Size: {item.size}</p>
                   </div>
 
-                  <p className="text-xs text-gray-500 mt-2">Date : 25, July, 2025</p>
+                  <p className="text-sm text-gray-500 mt-2">{new Date(item.date).toDateString()}</p>
+                  <p className="text-sm text-gray-500 mt-2">Payment : {item.paymentMethod}</p>
                 </div>
 
                 {/* Centered Status */}
                 <div className="hidden md:flex flex-col justify-center items-center min-w-[140px]">
                   <div className="flex items-center gap-2 text-sm text-green-600">
                     <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                    <p>Ready to ship</p>
+                    <p>{item.status}</p>
                   </div>
                 </div>
               </div>

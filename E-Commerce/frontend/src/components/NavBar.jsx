@@ -5,7 +5,7 @@ import { UserContext } from "../context/Context";
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch, cartCount } = useContext(UserContext);
+  const { setShowSearch, cartCount,token,setToken,navigate } = useContext(UserContext);
 
   const navLinks = [
     { label: "HOME", to: "/" },
@@ -14,10 +14,17 @@ function NavBar() {
     { label: "CONTACT", to: "/contact" },
   ];
 
+  const logout = () =>{
+    localStorage.removeItem('token');
+    setToken("");
+    navigate('/login')
+
+  }
+
   return (
     <div className="flex items-center justify-between py-5 font-medium relative z-50">
       <img src={assets.logo} className="w-36" alt="Logo" />
-      
+
       {/* Desktop Nav */}
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         {navLinks.map((link) => (
@@ -42,20 +49,35 @@ function NavBar() {
         />
 
         {/* Profile Dropdown */}
-        <div className="relative group">
-          <Link to="/login">
-            <img
-              src={assets.profile_icon}
-              className="w-5 cursor-pointer"
-              alt="Profile"
-            />
-          </Link>
-          <div className="hidden group-hover:flex absolute right-0 mt-2 flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded shadow">
-            <p className="cursor-pointer hover:text-black">My Profile</p>
-            <p className="cursor-pointer hover:text-black">Orders</p>
-            <p className="cursor-pointer hover:text-black">Logout</p>
-          </div>
-        </div>
+<div className="relative group">
+  <img
+  onClick={()=> token ? null : navigate('/login')}
+    src={assets.profile_icon}
+    className="w-5 cursor-pointer"
+    alt="Profile"
+  />
+
+  {token && (
+    <div className="absolute right-0 mt-2 hidden group-hover:flex flex-col gap-2 w-40 py-3 px-4 bg-white text-gray-600 rounded-lg shadow-lg transition-all duration-200 ease-in-out z-50">
+      <button className="text-left hover:text-black hover:bg-gray-100 px-2 py-1 rounded transition">
+        My Profile
+      </button>
+      <button
+        onClick={() => navigate('/orders')}
+        className="text-left hover:text-black hover:bg-gray-100 px-2 py-1 rounded transition"
+      >
+        Orders
+      </button>
+      <button
+        onClick={() => logout()}
+        className="text-left hover:text-red-500 hover:bg-gray-100 px-2 py-1 rounded transition"
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
+
 
         {/* Cart */}
         <Link to="/cart" className="relative">
@@ -76,9 +98,8 @@ function NavBar() {
 
       {/* Mobile Nav */}
       <div
-        className={`fixed top-0 right-0 bottom-0 z-40 transition-all bg-white overflow-hidden ${
-          visible ? "w-full p-4" : "w-0"
-        }`}
+        className={`fixed top-0 right-0 bottom-0 z-40 transition-all bg-white overflow-hidden ${visible ? "w-full p-4" : "w-0"
+          }`}
       >
         <div className="flex flex-col text-gray-500">
           <div

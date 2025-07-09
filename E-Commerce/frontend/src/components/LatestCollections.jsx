@@ -7,6 +7,7 @@ import Products from './Products'
 const LatestCollections = () => {
     const {products} = useContext(UserContext);
     const [latest,setLatest] = useState([]);
+    
 
     useEffect(()=>{
         setLatest(products.slice(0,10));
