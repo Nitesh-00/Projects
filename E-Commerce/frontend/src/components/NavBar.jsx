@@ -23,7 +23,9 @@ function NavBar() {
 
   return (
     <div className="flex items-center justify-between py-5 font-medium relative z-50">
-      <img src={assets.logo} className="w-36" alt="Logo" />
+      <Link to="/">
+        <img src={assets.logo} className="w-36" alt="Logo" />
+      </Link>
 
       {/* Desktop Nav */}
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
