@@ -17,6 +17,7 @@ function Orders() {
       }
 
       const response = await axios.post(backendUrl+"/api/order/userorders",{},{headers:{token}});
+      console.log(response.data);
       
       if(response.data.success){
         const orderfetch = [];
@@ -101,7 +102,7 @@ function Orders() {
 
               {/* Track Order Button */}
               <div>
-                <button className="bg-black text-white px-5 py-2 rounded-xl text-sm hover:opacity-90 transition">
+                <button onClick={loadOrders} className="bg-black text-white px-5 py-2 rounded-xl text-sm hover:opacity-90 transition">
                   Track order
                 </button>
               </div>

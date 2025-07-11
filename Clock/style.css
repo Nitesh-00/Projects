@@ -1,0 +1,35 @@
+/* Reset and center everything */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.search-bar input {
+  width: 500px;
+  padding: 14px 20px;
+  border-radius: 24px;
+  border: 1px solid #dfe1e5;
+  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  box-shadow: 0 1px 6px rgba(60,64,67,0.3), 0 1px 3px rgba(60,64,67,0.15);
+  border-color: transparent;
+}
